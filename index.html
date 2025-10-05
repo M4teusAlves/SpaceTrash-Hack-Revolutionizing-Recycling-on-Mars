@@ -1,0 +1,1977 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Guris de Marte</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='20' fill='%23D35A2A'/><g fill='white'><circle cx='50' cy='15' r='4'/><circle cx='80.31' cy='32.5' r='4'/><circle cx='80.31' cy='67.5' r='4'/><circle cx='50' cy='85' r='4'/><circle cx='19.69' cy='67.5' r='4'/><circle cx='19.69' cy='32.5' r='4'/></g></svg>">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@700;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --font-display: 'Exo 2', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        .font-display {
+            font-family: var(--font-display);
+        }
+
+        .font-body {
+            font-family: var(--font-body);
+        }
+
+        @keyframes rocket-fly {
+            0% {
+                transform: translate(-20%, 110%) rotate(45deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translate(120%, -120%) rotate(45deg);
+                opacity: 1;
+            }
+        }
+
+        .animate-rocket-fly {
+            animation: rocket-fly 25s linear infinite;
+            animation-delay: 2s;
+        }
+
+        @keyframes meteor-shower {
+            0% {
+                transform: translateX(0) translateY(0);
+                opacity: 1;
+            }
+
+            70% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateX(-500px) translateY(300px);
+                opacity: 0;
+            }
+        }
+
+        .animate-meteor {
+            animation: meteor-shower 5s linear infinite;
+        }
+
+        @keyframes fadeInOnScroll {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-section {
+            opacity: 0;
+            animation: fadeInOnScroll linear forwards;
+            animation-timeline: view();
+            animation-range-start: entry 10%;
+            animation-range-end: entry 40%;
+        }
+
+        /* Novas Animações */
+        @keyframes orbit-spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .orbiting-elements {
+            animation: orbit-spin 15s linear infinite;
+            transform-origin: 50% 50%;
+            /* Garante que a rotação seja a partir do centro do SVG */
+        }
+
+        .firework {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: transparent;
+            border-radius: 50%;
+            opacity: 1;
+            box-shadow: 0 0 10px #FFF, 0 0 20px #FFF, 0 0 30px #f97316, 0 0 40px #f97316;
+            animation: firework-explode 2.5s ease-out infinite;
+        }
+
+        .firework:nth-child(2) {
+            animation-delay: 0.7s;
+        }
+
+        .firework:nth-child(3) {
+            animation-delay: 1.6s;
+        }
+
+        @keyframes firework-explode {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+
+            80% {
+                transform: scale(1.8);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1.8);
+                opacity: 0;
+            }
+        }
+
+
+        /* Animações das ilustrações */
+        @keyframes astronaut-arm {
+
+            0%,
+            100% {
+                transform: rotate(0deg);
+            }
+
+            50% {
+                transform: rotate(5deg);
+            }
+        }
+
+        .animate-astronaut-arm {
+            animation: astronaut-arm 3s ease-in-out infinite;
+            transform-origin: 28px 18px;
+        }
+
+        @keyframes rotate-gear {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .animate-rotate-gear {
+            animation: rotate-gear 5s linear infinite;
+            transform-origin: 50% 50%;
+        }
+
+        .animate-rotate-gear-rev {
+            animation: rotate-gear 5s linear infinite reverse;
+            transform-origin: 50% 50%;
+        }
+
+        @keyframes saw-blade-move {
+            from {
+                stroke-dashoffset: 0;
+            }
+
+            to {
+                stroke-dashoffset: 100;
+            }
+        }
+
+        @keyframes pulse-glow {
+
+            0%,
+            100% {
+                opacity: 0.7;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        .animate-pulse-glow {
+            animation: pulse-glow 2.5s ease-in-out infinite;
+        }
+
+        @keyframes print-head-move {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            50% {
+                transform: translateX(10px);
+            }
+        }
+
+        .animate-print-head {
+            animation: print-head-move 4s ease-in-out infinite;
+        }
+
+        @keyframes waam-arm-move {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            25% {
+                transform: translate(10px, 5px);
+            }
+
+            50% {
+                transform: translate(20px, 0);
+            }
+
+            75% {
+                transform: translate(10px, -5px);
+            }
+        }
+
+
+        @keyframes print-build {
+            from {
+                stroke-dashoffset: 200;
+            }
+
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        .animate-print-build {
+            animation: print-build 8s linear infinite;
+            stroke-dasharray: 200;
+        }
+
+        @keyframes electric-spark {
+
+            0%,
+            100% {
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        .animate-electric-spark {
+            animation: electric-spark 0.8s steps(2, end) infinite;
+        }
+
+        @keyframes press-down {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(12px);
+            }
+        }
+
+        .animate-needle-press {
+            animation: press-down 1s ease-in-out infinite;
+        }
+
+
+        @keyframes forge-press {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(15px);
+            }
+        }
+
+        .animate-forge-press {
+            animation: forge-press 2s ease-in-out infinite;
+        }
+
+        @keyframes float-bg {
+            0% {
+                transform: translateY(0px) rotate(-5deg);
+            }
+
+            50% {
+                transform: translateY(-25px) rotate(5deg);
+            }
+
+            100% {
+                transform: translateY(0px) rotate(-5deg);
+            }
+        }
+
+        .floating-element {
+            position: absolute;
+            opacity: 0.05;
+            animation: float-bg 20s ease-in-out infinite;
+            z-index: -1;
+            color: #0c0a1a;
+        }
+
+        .lang-btn.active {
+            background-color: #ea580c;
+            color: white;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-gradient-to-b from-[#0c0a1a] via-[#4a1c12] to-[#3b170f] font-body text-slate-200 selection:bg-orange-500/80 selection:text-white pt-24">
+
+    <!-- HEADER PRINCIPAL -->
+    <header
+        class="fixed top-0 left-0 right-0 z-50 bg-[#0c0a1a]/80 backdrop-blur-sm border-b border-orange-500/20 shadow-lg h-16">
+        <div class="container mx-auto px-6 h-full flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <!-- SVG Logo -->
+                <div class="w-12 h-12">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"
+                        class="transform transition-transform duration-500">
+                        <!-- Elemento Central: Marte -->
+                        <circle cx="50" cy="50" r="20" fill="#D35A2A" />
+
+                        <!-- 6 Elementos em Órbita -->
+                        <g fill="white" class="orbiting-elements">
+                            <circle cx="50" cy="15" r="4" />
+                            <circle cx="80.31" cy="32.5" r="4" />
+                            <circle cx="80.31" cy="67.5" r="4" />
+                            <circle cx="50" cy="85" r="4" />
+                            <circle cx="19.69" cy="67.5" r="4" />
+                            <circle cx="19.69" cy="32.5" r="4" />
+                        </g>
+                    </svg>
+                </div>
+                <span id="team-name" class="font-display text-xl font-bold text-white tracking-wider">Guris de Marte
+                    Team</span>
+            </div>
+            <nav class="flex items-center gap-4">
+                <a href="https://www.instagram.com/nasaspaceappsuberlandia/" target="_blank" rel="noopener noreferrer"
+                    id="hackathon-link"
+                    class="text-slate-300 font-medium text-sm sm:text-base hover:text-orange-300 transition-colors duration-300">Hackathon
+                    Nasa Space Apps Uberlândia</a>
+                <div class="flex gap-2">
+                    <button id="lang-pt"
+                        class="lang-btn text-xs font-semibold px-2 py-1 rounded-md bg-slate-700/50 hover:bg-orange-600/80 transition-colors duration-300 active">PT</button>
+                    <button id="lang-en"
+                        class="lang-btn text-xs font-semibold px-2 py-1 rounded-md bg-slate-700/50 hover:bg-orange-600/80 transition-colors duration-300">EN</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <!-- SUB-HEADER PARTICIPANTES -->
+    <div class="fixed top-16 left-0 right-0 z-40 bg-[#0c0a1a]/70 backdrop-blur-sm border-b border-orange-500/10">
+        <div class="container mx-auto px-6 py-1">
+            <div class="flex flex-wrap justify-center gap-x-4 gap-y-1 text-xs text-slate-300 tracking-wide">
+                <span>Danilo Seehaber</span>
+                <span>Filipe Nascimento</span>
+                <span>Gustavo Machado</span>
+                <span>Nathan Rodrigues</span>
+                <span>Pedro Henrique</span>
+                <span>Mateus Alves</span>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Background Glows -->
+    <div class="absolute inset-0 -z-10 overflow-hidden">
+        <div
+            class="absolute -top-1/4 right-0 h-[80vh] w-[60vw] rounded-full bg-[radial-gradient(circle,rgba(234,88,12,0.15)_0%,transparent_70%)] opacity-70 blur-3xl">
+        </div>
+        <div
+            class="absolute -bottom-1/4 left-0 h-[60vh] w-[70vw] rounded-full bg-[radial-gradient(circle,rgba(211,90,42,0.15)_0%,transparent_70%)] opacity-60 blur-3xl">
+        </div>
+    </div>
+
+    <!-- Floating Pollution Background Elements -->
+    <div class="absolute inset-0 overflow-hidden top-[60vh]">
+        <svg class="floating-element w-48 h-48 top-[5%] left-[10%]" style="animation-delay: -12s" viewBox="0 0 24 24"
+            fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M20 6H22V8H20V6ZM20 10H22V16H20V10ZM18 4H20V2H18V4ZM16 20H18V18H16V20ZM14 4H16V2H14V4ZM12 20H14V18H12V20ZM10 4H12V2H10V4ZM8 20H10V18H8V20ZM6 4H8V2H6V4ZM4 20H6V18H4V20ZM2 18H4V16H2V18Z" />
+        </svg>
+        <svg class="floating-element w-32 h-32 top-[30%] right-[5%]" style="animation-delay: -6s" viewBox="0 0 24 24"
+            fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2ZM12 14C13.1046 14 14 13.1046 14 12C14 10.8954 13.1046 10 12 10C10.8954 10 10 10.8954 10 12C10 13.1046 10.8954 14 12 14Z" />
+        </svg>
+        <svg class="floating-element w-56 h-56 bottom-[10%] left-[20%]" style="animation-delay: -18s"
+            viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12ZM12 14C13.1046 14 14 13.1046 14 12C14 10.8954 13.1046 10 12 10C10.8954 10 10 10.8954 10 12C10 13.1046 10.8954 14 12 14Z" />
+        </svg>
+    </div>
+
+    <!-- HERO SECTION -->
+    <section
+        class="relative flex flex-col items-center justify-center text-center h-[60vh] min-h-[450px] overflow-hidden">
+        <!-- SVG de paisagem marciana com estrelas -->
+        <svg viewBox="0 0 1440 500" preserveAspectRatio="xMidYMid slice"
+            class="absolute inset-0 w-full h-full object-cover">
+            <defs>
+                <radialGradient id="skyGradient" cx="50%" cy="10%" r="90%">
+                    <stop offset="0%" stop-color="#21123c" />
+                    <stop offset="100%" stop-color="#0c0a1a" />
+                </radialGradient>
+                <filter id="glow">
+                    <feGaussianBlur stdDeviation="1.5" result="coloredBlur" />
+                    <feMerge>
+                        <feMergeNode in="coloredBlur" />
+                        <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                </filter>
+            </defs>
+            <rect width="1440" height="500" fill="#1e100f" />
+            <!-- Gradiente do ceu de Marte -->
+            <rect width="1440" height="400" fill="url(#skyGradient)" />
+
+            <!-- Estrelas -->
+            <g fill="white" opacity="0.7" style="filter: url(#glow);">
+                <circle cx="100" cy="50" r="1.2" />
+                <circle cx="150" cy="150" r="0.8" />
+                <circle cx="250" cy="80" r="1" />
+                <circle cx="340" cy="200" r="1.5" />
+                <circle cx="500" cy="120" r="0.9" />
+                <circle cx="650" cy="60" r="1.3" />
+                <circle cx="780" cy="180" r="1.1" />
+                <circle cx="900" cy="90" r="0.7" />
+                <circle cx="1050" cy="160" r="1.4" />
+                <circle cx="1200" cy="70" r="1" />
+                <circle cx="1350" cy="130" r="1.2" />
+                <circle cx="1400" cy="220" r="0.8" />
+            </g>
+
+            <!-- Animação de Meteoro -->
+            <g class="animate-meteor" style="animation-delay: 1s;">
+                <path d="M 1200 100 L 1100 150" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.6" />
+            </g>
+            <g class="animate-meteor" style="animation-delay: 5s;">
+                <path d="M 800 50 L 700 100" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity="0.4" />
+            </g>
+
+            <!-- Paisagem de Marte -->
+            <path
+                d="M-200 500 C 200 350, 400 380, 600 420 C 800 460, 1000 400, 1200 450 C 1400 500, 1600 450, 1800 500 L1800 500 L-200 500 Z"
+                fill="#974421" opacity="0.6" />
+            <path
+                d="M-200 500 C 150 400, 350 420, 550 450 C 750 480, 950 430, 1150 460 C 1350 490, 1550 460, 1800 500 L1800 500 L-200 500 Z"
+                fill="#D35A2A" />
+            <!-- Civilização Humana (Silhueta) -->
+            <g opacity="0.6" transform="translate(600 420)">
+                <path d="M 0 0 a 60 20 0 0 1 120 0 z" fill="#0C0A1A" opacity="0.5" />
+                <path d="M 60 0 l 0 -35" stroke="#0C0A1A" stroke-width="2" opacity="0.6" />
+                <circle cx="60" cy="-35" r="3" fill="#0C0A1A" opacity="0.7" />
+                <path d="M 150 25 a 40 15 0 0 1 80 0 z" fill="#0C0A1A" opacity="0.4" />
+            </g>
+
+            <!-- Detritos Residuais na Paisagem -->
+            <g fill="#0C0A1A" opacity="0.4">
+                <!-- Garrafa 1 -->
+                <path transform="translate(150 440) rotate(-15)" d="M0,0 L5,15 L15,18 L20,10 L15,0 Z M5,0 Q8,-5 12,0" />
+                <!-- Engrenagem quebrada -->
+                <path transform="translate(300 460)"
+                    d="M0,0 a10,10 0 1,1 20,0 a10,10 0 1,1 -20,0 M-2,-12 l4,4 M-8,-8 l4,4 M-12,-2 l4,4 M-8,8 l4,4"
+                    stroke="#0C0A1A" stroke-width="2" />
+                <!-- Placa de metal -->
+                <path transform="translate(450 430) rotate(25)" d="M0,0 L30,5 L25,20 L-5,15 Z" />
+                <!-- Lata amassada -->
+                <path transform="translate(900 455)" d="M0,0 C5,5 15,5 20,0 L22,15 C17,22 7,22 2,15 Z" />
+                <!-- Pedaço de painel -->
+                <rect x="1100" y="470" width="40" height="15" rx="2" transform="rotate(-10 1120 477.5)" />
+                <circle cx="1110" cy="478" r="2" />
+                <circle cx="1130" cy="475" r="1.5" />
+                <!-- Fio solto -->
+                <path d="M1250 450 C 1260 460, 1270 440, 1280 450" stroke="#0C0A1A" stroke-width="1.5" fill="none" />
+            </g>
+
+            <!-- Foguete Animado -->
+            <g class="animate-rocket-fly">
+                <path d="M 10 0 L -5 10 L 0 8 L 5 10 Z" fill="white" />
+                <path d="M 0 10 C 5 20, -5 20, 0 30" stroke="orange" stroke-width="2" fill="none"
+                    stroke-linecap="round" />
+            </g>
+        </svg>
+
+        <div class="relative z-10 p-4">
+            <div class="absolute inset-0 flex items-center justify-center pointer-events-none -top-10">
+                <div class="firework"></div>
+                <div class="firework"></div>
+                <div class="firework"></div>
+            </div>
+            <h1 id="hero-title"
+                class="font-display text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white drop-shadow-[0_4px_10px_rgba(251,146,60,0.5)] mb-4">
+                Reciclagem e Manufatura em Marte
+            </h1>
+            <p id="hero-subtitle"
+                class="text-lg sm:text-xl text-orange-200 max-w-2xl mx-auto font-medium drop-shadow-lg">
+                Um Sistema Sustentável para a Gestão de Resíduos e Autossuficiência em Missões Espaciais
+            </p>
+        </div>
+    </section>
+
+    <main class="container mx-auto px-6">
+        <!-- O Problema do Lixo Marciano -->
+        <section class="max-w-4xl mx-auto fade-in-section">
+            <div
+                class="rounded-xl bg-slate-900/70 border border-orange-500/30 shadow-2xl shadow-orange-900/20 p-6 md:p-8 mt-[-80px] mb-16 backdrop-blur-md transition-all duration-300 hover:border-orange-400/60 hover:shadow-orange-800/30 hover:-translate-y-2">
+                <h2 id="intro-title"
+                    class="font-display text-3xl font-bold text-orange-300 mb-4 flex items-center gap-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="text-orange-400">
+                        <path d="m21.73 18-8-14a2 2 0 0 0-3.46 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" />
+                        <path d="M12 9v4" />
+                        <path d="M12 17h.01" />
+                    </svg>
+                    Introdução: O Desafio da Sustentabilidade em Marte
+                </h2>
+                <div class="space-y-4 text-slate-300 text-base md:text-lg leading-relaxed">
+                    <p id="intro-p1">
+                        A exploração humana de Marte representa um dos maiores desafios científicos e tecnológicos do
+                        século XXI. Para garantir autossuficiência e sustentabilidade, a gestão de resíduos e o
+                        reaproveitamento de materiais in situ emergem como fatores críticos. Estima-se que uma missão de
+                        três anos para Marte, com uma tripulação de oito pessoas, possa gerar mais de 12 toneladas de
+                        resíduos inorgânicos, tornando inviável o descarte ou o retorno à Terra.
+                    </p>
+                    <p id="intro-p2">
+                        Nossa solução propõe um modelo conceitual de reciclagem e manufatura pós-reciclagem de materiais
+                        poliméricos, metálicos e têxteis, com ênfase em componentes como Zotek F30, Plastazote, EVA,
+                        luvas de nitrila e alumínio, resíduos comuns em missões espaciais. Este projeto busca
+                        desenvolver um sistema sustentável de reciclagem e manufatura em ambiente marciano, baseado em
+                        tecnologias já testadas pela NASA.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Solução para a Questão do Plástico -->
+    <section class="w-full relative">
+        <div class="text-center mb-20 fade-in-section">
+            <h2 id="poly-title" class="font-display text-center text-3xl sm:text-4xl font-extrabold text-white mb-4">
+                Processamento de Polímeros: Manufatura Aditiva e Reciclagem</h2>
+            <p id="poly-subtitle" class="text-slate-400 max-w-2xl mx-auto">Transformação de resíduos como Zotek F30,
+                Plastazote e EVA em novos produtos por meio de processos modulares e de baixo consumo energético.</p>
+        </div>
+
+        <!-- Container do Novo Fluxo para Plásticos -->
+        <div class="max-w-7xl mx-auto flex flex-col items-center gap-y-8 py-12 px-6">
+
+            <!-- Etapa 1 -->
+            <div class="fade-in-section group flex flex-col items-center gap-4 max-w-2xl w-full">
+                <div class="w-full md:w-2/3 cursor-pointer" data-modal-trigger
+                    data-title-pt="1. Triagem de Resíduos Poliméricos"
+                    data-description-pt="A primeira etapa consiste na coleta e separação manual dos resíduos poliméricos. Os materiais-alvo incluem espumas de polietileno (Zotek F30, Plastazote), EVA, embalagens e luvas de nitrila. A triagem garante a pureza do material para o processamento."
+                    data-title-en="1. Polymer Waste Sorting"
+                    data-description-en="The first stage consists of the manual collection and separation of polymer waste. Target materials include polyethylene foams (Zotek F30, Plastazote), EVA, packaging, and nitrile gloves. Sorting ensures the purity of the material for processing.">
+                    <div
+                        class="p-4 bg-slate-900/50 rounded-lg border border-orange-500/20 shadow-2xl transition-all duration-300 group-hover:border-emerald-400/50 group-hover:scale-105 relative group">
+                        <svg viewBox="0 0 100 80" class="w-full h-auto" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="100" height="80" rx="4" fill="#0c0a1a"></rect>
+                            <path d="M 0 80 C 30 60, 70 75, 100 65 V 80 H 0 Z" fill="#D35A2A" opacity="0.4"></path>
+                            <rect x="15" y="68" width="10" height="5" rx="1" fill="#4ade80"
+                                transform="rotate(-15 20 70)"></rect>
+                            <polygon points="80,72 85,65 90,74" fill="#60a5fa"></polygon>
+                            <circle cx="50" cy="75" r="3" fill="#f59e0b"></circle>
+                            <g transform="translate(35 28)">
+                                <ellipse cx="15" cy="45" rx="12" ry="3" fill="black" opacity="0.3"></ellipse>
+                                <rect x="8" y="25" width="6" height="15" fill="#CBD5E0"></rect>
+                                <rect x="16" y="25" width="6" height="15" fill="#CBD5E0"></rect>
+                                <rect x="5" y="10" width="20" height="20" rx="5" fill="#E2E8F0"></rect>
+                                <rect x="-2" y="12" width="9" height="16" rx="2" fill="#A0AEC0"></rect>
+                                <circle cx="15" cy="5" r="8" fill="#E2E8F0"></circle>
+                                <circle cx="18" cy="5" r="4" fill="#0c0a1a"></circle>
+                                <g class="animate-astronaut-arm">
+                                    <path d="M 25 15 L 45 35" stroke="#A0AEC0" stroke-width="3" fill="none"
+                                        stroke-linecap="round"></path>
+                                    <path d="M 45 35 L 50 40" stroke="#A0AEC0" stroke-width="3" fill="none"
+                                        stroke-linecap="round"></path>
+                                    <path d="M 45 35 L 40 40" stroke="#A0AEC0" stroke-width="3" fill="none"
+                                        stroke-linecap="round"></path>
+                                </g>
+                            </g>
+                        </svg>
+                        <div
+                            class="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                            <span id="poly-details-1"
+                                class="text-white font-display font-bold text-xl tracking-wider flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="w-6 h-6">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                </svg>
+                                Ver Detalhes
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full text-center">
+                    <div class="flex items-center justify-center gap-3 mb-2">
+                        <div class="text-3xl font-bold text-emerald-400">01</div>
+                        <h3 id="poly-step1-title" class="font-display text-2xl font-semibold text-emerald-300">Triagem
+                            de Resíduos Poliméricos</h3>
+                    </div>
+                    <p id="poly-step1-desc" class="text-slate-300 leading-relaxed">Separação de resíduos como espumas e
+                        embalagens.</p>
+                </div>
+            </div>
+
+            <svg class="w-12 h-12 text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 14l-7 7m0 0l-7-7m7 7V3">
+                </path>
+            </svg>
+
+            <!-- Etapa 2 -->
+            <div class="fade-in-section group flex flex-col items-center gap-4 max-w-2xl w-full">
+                <div class="w-full md:w-2/3 cursor-pointer" data-modal-trigger
+                    data-title-pt="2. Redução Granulométrica e Densificação"
+                    data-description-pt="Os polímeros são inseridos em um módulo triturador (aprox. 1.5 kW) que os reduz a flocos uniformes. Opcionalmente, os flocos passam por compactação térmica para reduzir o volume, otimizando o armazenamento e a alimentação da extrusora."
+                    data-title-en="2. Size Reduction and Densification"
+                    data-description-en="Polymers are fed into a shredder module (approx. 1.5 kW) that reduces them to uniform flakes. Optionally, the flakes undergo thermal compaction to reduce volume, optimizing storage and feeding into the extruder.">
+                    <div
+                        class="p-4 bg-slate-900/50 rounded-lg border border-orange-500/20 shadow-2xl transition-all duration-300 group-hover:border-sky-400/50 group-hover:scale-105 relative group">
+                        <svg viewBox="0 0 100 80" class="w-full h-auto" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="100" height="80" rx="4" fill="#0c0a1a"></rect>
+                            <rect x="25" y="60" width="50" height="15" fill="#2d3748"></rect>
+                            <rect x="28" y="20" width="44" height="40" fill="#a0aec0"></rect>
+                            <path d="M 20 5 L 80 5 L 72 20 L 28 20 Z" fill="#cbd5e0"></path>
+                            <rect x="68" y="25" width="22" height="30" rx="2" fill="#60a5fa"></rect>
+                            <rect x="68" y="30" width="22" height="5" fill="#818cf8"></rect>
+                            <circle cx="84" cy="45" r="4" fill="#4338ca"></circle>
+                        </svg>
+                        <div
+                            class="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                            <span id="poly-details-2"
+                                class="text-white font-display font-bold text-xl tracking-wider flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="w-6 h-6">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                </svg>
+                                Ver Detalhes
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full text-center">
+                    <div class="flex items-center justify-center gap-3 mb-2">
+                        <div class="text-3xl font-bold text-sky-400">02</div>
+                        <h3 id="poly-step2-title" class="font-display text-2xl font-semibold text-sky-300">Redução
+                            Granulométrica</h3>
+                    </div>
+                    <p id="poly-step2-desc" class="text-slate-300 leading-relaxed">Trituração dos materiais em flocos
+                        uniformes.</p>
+                </div>
+            </div>
+
+            <svg class="w-full max-w-lg h-16 text-slate-500" fill="none" viewBox="0 0 100 50" stroke="currentColor"
+                preserveAspectRatio="none">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                    d="M50 0 V15 M50 15 L15 40 M50 15 L85 40"></path>
+            </svg>
+
+            <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
+                <!-- Etapa 3 -->
+                <div class="fade-in-section group flex flex-col items-center gap-4">
+                    <div class="w-full cursor-pointer" data-modal-trigger data-title-pt="3. Extrusão de Filamentos"
+                        data-description-pt="Os flocos são fundidos em uma extrusora (massa est. 20-30 kg, pico de 2 kW), que força o polímero derretido através de uma matriz para formar filamentos contínuos. Estes filamentos são a matéria-prima para a manufatura aditiva."
+                        data-title-en="3. Filament Extrusion"
+                        data-description-en="The flakes are melted in an extruder (est. mass 20-30 kg, peak 2 kW), which forces the molten polymer through a die to form continuous filaments. These filaments are the raw material for additive manufacturing.">
+                        <div
+                            class="p-4 bg-slate-900/50 rounded-lg border border-orange-500/20 shadow-2xl transition-all duration-300 group-hover:border-amber-400/50 group-hover:scale-105 relative group">
+                            <svg viewBox="0 0 100 80" class="w-full h-auto" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="100" height="80" rx="4" fill="#0c0a1a"></rect>
+                                <rect x="15" y="65" width="70" height="10" fill="#2d3748"></rect>
+                                <rect x="10" y="25" width="80" height="40" rx="2" fill="#718096"></rect>
+                                <rect x="10" y="30" width="20" height="30" fill="#a0aec0"></rect>
+                                <rect x="15" y="35" width="10" height="20" fill="#cbd5e0"></rect>
+                                <rect x="30" y="40" width="55" height="10" fill="#4a5568"></rect>
+                                <path d="M85 45 L 95 40 L 95 50 Z" fill="#f59e0b"></path>
+                                <path class="animate-pulse-glow" d="M 40 30 h 30" stroke="#f87171" stroke-width="4"
+                                    stroke-linecap="round">
+                                </path>
+                            </svg>
+                            <div
+                                class="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                                <span id="poly-details-3"
+                                    class="text-white font-display font-bold text-xl tracking-wider flex items-center gap-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="w-6 h-6">
+                                        <circle cx="11" cy="11" r="8"></circle>
+                                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                    </svg>
+                                    Ver Detalhes
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full text-center">
+                        <div class="flex items-center justify-center gap-3 mb-2">
+                            <div class="text-3xl font-bold text-amber-400">03</div>
+                            <h3 id="poly-step3-title" class="font-display text-2xl font-semibold text-amber-300">
+                                Extrusão de Filamentos</h3>
+                        </div>
+                        <p id="poly-step3-desc" class="text-slate-300 leading-relaxed">Produção de matéria-prima para
+                            impressão 3D.</p>
+                    </div>
+                </div>
+                <!-- Etapa 4 -->
+                <div class="fade-in-section group flex flex-col items-center gap-4">
+                    <div class="w-full cursor-pointer" data-modal-trigger
+                        data-title-pt="4. Moldagem por Termocompressão"
+                        data-description-pt="Como alternativa, os flocos são aquecidos e colocados em moldes dentro de uma prensa (massa aprox. 40-50 kg). O módulo aplica calor e pressão para formar peças estruturais densas, ideal para geometrias simples."
+                        data-title-en="4. Thermo-compression Molding"
+                        data-description-en="Alternatively, the flakes are heated and placed in molds inside a press (approx. mass 40-50 kg). The module applies heat and pressure to form dense structural parts, ideal for simple geometries.">
+                        <div
+                            class="p-4 bg-slate-900/50 rounded-lg border border-orange-500/20 shadow-2xl transition-all duration-300 group-hover:border-violet-400/50 group-hover:scale-105 relative group">
+                            <svg viewBox="0 0 100 80" class="w-full h-auto" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="100" height="80" rx="4" fill="#0c0a1a"></rect>
+                                <rect x="10" y="70" width="80" height="5" fill="#2d3748"></rect>
+                                <path d="M 25 70 V 20 H 75 V 30 H 35 V 70 Z" fill="#4a5568"></path>
+                                <rect x="25" y="15" width="50" height="5" fill="#4a5568"></rect>
+                                <g transform="translate(75 22.5)">
+                                    <circle cx="0" cy="0" r="8" fill="#718096"></circle>
+                                    <rect x="0" y="-1.5" width="20" height="3" fill="#a0aec0" transform="rotate(30)">
+                                    </rect>
+                                    <circle cx="17.3" cy="10" r="3" fill="#cbd5e0"></circle>
+                                </g>
+                                <g class="animate-press-down">
+                                    <rect x="45" y="20" width="10" height="30" fill="#718096"></rect>
+                                </g>
+                                <g class="animate-pulse-glow">
+                                    <rect x="40" y="60" width="20" height="10" fill="#a78bfa"></rect>
+                                </g>
+                            </svg>
+                            <div
+                                class="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                                <span id="poly-details-4"
+                                    class="text-white font-display font-bold text-xl tracking-wider flex items-center gap-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="w-6 h-6">
+                                        <circle cx="11" cy="11" r="8"></circle>
+                                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                    </svg>
+                                    Ver Detalhes
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full text-center">
+                        <div class="flex items-center justify-center gap-3 mb-2">
+                            <div class="text-3xl font-bold text-violet-400">04</div>
+                            <h3 id="poly-step4-title" class="font-display text-2xl font-semibold text-violet-300">
+                                Moldagem por Termocompressão</h3>
+                        </div>
+                        <p id="poly-step4-desc" class="text-slate-300 leading-relaxed">Fabricação de peças densas por
+                            prensagem.</p>
+                    </div>
+                </div>
+            </div>
+
+            <svg class="w-full max-w-lg h-16 text-slate-500" fill="none" viewBox="0 0 100 50" stroke="currentColor"
+                preserveAspectRatio="none">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                    d="M15 10 L50 35 M85 10 L50 35 M50 35 V50"></path>
+            </svg>
+
+            <!-- Etapa 5 -->
+            <div class="fade-in-section group flex flex-col items-center gap-4 max-w-2xl w-full">
+                <div class="w-full md:w-2/3 cursor-pointer" data-modal-trigger
+                    data-title-pt="5. Manufatura Aditiva (FDM/FFF)"
+                    data-description-pt="Os filamentos são usados em impressoras 3D (massa est. 50-70 kg) baseadas nos modelos da NASA (ReFabricator, AMF). A tecnologia FDM (Fused Deposition Modeling) permite a fabricação de peças, ferramentas e componentes com geometria complexa."
+                    data-title-en="5. Additive Manufacturing (FDM/FFF)"
+                    data-description-en="The filaments are used in 3D printers (est. mass 50-70 kg) based on NASA models (ReFabricator, AMF). FDM (Fused Deposition Modeling) technology allows for the fabrication of complex parts, tools, and components.">
+                    <div
+                        class="p-4 bg-slate-900/50 rounded-lg border border-orange-500/20 shadow-2xl transition-all duration-300 group-hover:border-orange-400/50 group-hover:scale-105 relative group">
+                        <svg viewBox="0 0 100 80" class="w-full h-auto" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="metal" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" stop-color="#718096"></stop>
+                                    <stop offset="100%" stop-color="#4a5568"></stop>
+                                </linearGradient>
+                            </defs>
+                            <rect width="100" height="80" rx="4" fill="#0c0a1a"></rect>
+                            <rect x="5" y="45" width="90" height="5" fill="url(#metal)" stroke="#2d3748"
+                                stroke-width="0.5"></rect>
+                            <rect x="10" y="50" width="4" height="25" fill="#2d3748"></rect>
+                            <rect x="86" y="50" width="4" height="25" fill="#2d3748"></rect>
+                            <rect x="12" y="70" width="76" height="3" fill="#2d3748"></rect>
+                            <path d="M 15 45 Q 50 42, 85 45" fill="black" opacity="0.2"></path>
+                            <rect x="15" y="30" width="25" height="15" rx="1" fill="#1e293b"></rect>
+                            <rect x="15" y="31" width="25" height="2" fill="#4a5568"></rect>
+                            <rect x="15" y="35" width="25" height="2" fill="#4a5568"></rect>
+                            <rect x="15" y="39" width="25" height="2" fill="#4a5568"></rect>
+                            <circle cx="16" cy="30" r="4" fill="#2d3748"></circle>
+                            <rect x="25" y="27" width="8" height="3" fill="#2d3748"></rect>
+                            <rect x="40" y="32" width="18" height="13" fill="#a0aec0" stroke="#718096"
+                                stroke-width="0.5"></rect>
+                            <g class="animate-rotate-gear">
+                                <circle cx="45" cy="38.5" r="3" fill="none" stroke="#4a5568" stroke-width="1"></circle>
+                                <path d="M 45 35.5 V 32.5 M 45 41.5 V 44.5 M 48 38.5 H 51 M 42 38.5 H 39"
+                                    stroke="#4a5568" stroke-width="1"></path>
+                            </g>
+                            <rect x="58" y="32" width="22" height="13" fill="#4a5568" stroke="#2d3748"
+                                stroke-width="0.5"></rect>
+                            <circle cx="78" cy="38.5" r="1.5" fill="#2d3748"></circle>
+                            <path d="M 62 15 H 77 L 74 32 H 65 Z" fill="#1e293b" stroke="#4a5568" stroke-width="0.5">
+                            </path>
+                            <rect x="20" y="50" width="15" height="10" rx="2" fill="#f59e0b" opacity="0.8"></rect>
+                            <circle cx="24" cy="55" r="1.5" fill="#1e293b"></circle>
+                            <path d="M 27 50 Q 35 48, 38 43" stroke="#1e293b" stroke-width="1.5" fill="none"></path>
+                        </svg>
+                        <div
+                            class="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                            <span id="poly-details-5"
+                                class="text-white font-display font-bold text-xl tracking-wider flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="w-6 h-6">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                </svg>
+                                Ver Detalhes
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full text-center">
+                    <div class="flex items-center justify-center gap-3 mb-2">
+                        <div class="text-3xl font-bold text-orange-400">05</div>
+                        <h3 id="poly-step5-title" class="font-display text-2xl font-semibold text-orange-300">Manufatura
+                            Aditiva (FDM)</h3>
+                    </div>
+                    <p id="poly-step5-desc" class="text-slate-300 leading-relaxed">Impressão 3D de ferramentas, peças e
+                        utensílios.</p>
+                </div>
+            </div>
+
+            <svg class="w-12 h-12 text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 14l-7 7m0 0l-7-7m7 7V3">
+                </path>
+            </svg>
+
+            <!-- Etapa 6 e 7 combinadas -->
+            <div class="fade-in-section group flex flex-col items-center gap-4 max-w-2xl w-full">
+                <div class="w-full md:w-2/3 cursor-pointer" data-modal-trigger
+                    data-title-pt="6. Produção de Artefatos Funcionais"
+                    data-description-pt="Os produtos fabricados são utilizados em dois eixos: 'Renovação Residencial', para criar mobiliário e itens de conforto, e 'Celebração Cósmica', para a produção de objetos simbólicos que reforçam o bem-estar e a saúde mental da tripulação."
+                    data-title-en="6. Production of Functional Artifacts"
+                    data-description-en="The manufactured products are used in two main areas: 'Residential Renovation,' to create furniture and comfort items, and 'Cosmic Celebration,' for the production of symbolic objects that enhance the crew's well-being and mental health.">
+                    <div
+                        class="p-4 bg-slate-900/50 rounded-lg border border-orange-500/20 shadow-2xl transition-all duration-300 group-hover:border-red-400/50 group-hover:scale-105 relative group">
+                        <svg viewBox="0 0 100 80" class="w-full h-auto" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="screwdriverHandleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#fb923c"></stop>
+                                    <stop offset="100%" stop-color="#f97316"></stop>
+                                </linearGradient>
+                                <linearGradient id="metalGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#cbd5e0"></stop>
+                                    <stop offset="100%" stop-color="#a0aec0"></stop>
+                                </linearGradient>
+                                <linearGradient id="pcbGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#10b981"></stop>
+                                    <stop offset="100%" stop-color="#059669"></stop>
+                                </linearGradient>
+                            </defs>
+                            <rect width="100" height="80" rx="4" fill="#0c0a1a"></rect>
+                            <path d="M 0 40 H 100 M 0 60 H 100 M 25 0 V 80 M 50 0 V 80 M 75 0 V 80" stroke="#4a5568"
+                                stroke-width="0.5" opacity="0.3"></path>
+                            <g class="animate-pulse-glow" style="filter: url(#itemGlow)">
+                                <g transform="translate(45, 10)">
+                                    <rect width="45" height="30" rx="2" fill="url(#pcbGradient)" stroke="#047857"
+                                        stroke-width="0.7">
+                                    </rect>
+                                    <rect x="5" y="5" width="10" height="8" fill="#1e293b"></rect>
+                                    <rect x="20" y="8" width="15" height="5" fill="#1e293b"></rect>
+                                    <rect x="5" y="18" width="5" height="7" fill="#1e293b"></rect>
+                                    <path d="M 15 9 H 20 M 10 18 v 5 h 20 v -8" stroke="#fcd34d" stroke-width="0.5"
+                                        fill="none" opacity="0.7"></path>
+                                </g>
+                                <g transform="translate(20, 15)">
+                                    <circle cx="0" cy="0" r="5" fill="url(#metalGradient)" stroke="#718096"
+                                        stroke-width="0.5"></circle>
+                                    <path d="M -2.5 0 H 2.5" stroke="#1e293b" stroke-width="0.8"></path>
+                                </g>
+                                <g transform="translate(35, 25)">
+                                    <circle cx="0" cy="0" r="4" fill="url(#metalGradient)" stroke="#718096"
+                                        stroke-width="0.5"></circle>
+                                    <path d="M -2 0 H 2 M 0 -2 V 2" stroke="#1e293b" stroke-width="0.5"></path>
+                                </g>
+                                <g transform="translate(15, 50) rotate(-20)">
+                                    <rect x="0" y="0" width="35" height="10" rx="3"
+                                        fill="url(#screwdriverHandleGradient)" stroke="#ea580c" stroke-width="0.7">
+                                    </rect>
+                                    <rect x="35" y="3" width="25" height="4" fill="url(#metalGradient)" stroke="#718096"
+                                        stroke-width="0.5">
+                                    </rect>
+                                    <path d="M 60 2.5 l 3 2.5 l -3 2.5 Z" fill="url(#metalGradient)" stroke="#718096"
+                                        stroke-width="0.5">
+                                    </path>
+                                </g>
+                            </g>
+                        </svg>
+                        <div
+                            class="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                            <span id="poly-details-6"
+                                class="text-white font-display font-bold text-xl tracking-wider flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="w-6 h-6">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                </svg>
+                                Ver Detalhes
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full text-center">
+                    <div class="flex items-center justify-center gap-3 mb-2">
+                        <div class="text-3xl font-bold text-red-400">06</div>
+                        <h3 id="poly-step6-title" class="font-display text-2xl font-semibold text-red-300">Produção de
+                            Artefatos Funcionais</h3>
+                    </div>
+                    <p id="poly-step6-desc" class="text-slate-300 leading-relaxed">Uso dos materiais para o habitat e
+                        bem-estar da tripulação.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="bg-gradient-to-b from-[#3b170f] via-[#042f2e] to-[#0f172a] pt-20">
+        <!-- SOLUÇÃO PARA TÊXTEIS - Layout Reestruturado -->
+        <section class="w-full relative py-20">
+            <div class="text-center mb-20 fade-in-section">
+                <h2 id="textile-title"
+                    class="font-display text-center text-3xl sm:text-4xl font-extrabold text-white mb-4">Revalorização
+                    de Têxteis: Processos Mecânicos e Térmicos</h2>
+                <p id="textile-subtitle" class="text-slate-300 max-w-3xl mx-auto">Um sistema unificado que se divide em
+                    rotas para fibras sintéticas e não-sintéticas, transformando-as em novos produtos para a colônia.
+                </p>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-6 space-y-16">
+                <!-- Etapa Inicial Comum -->
+                <div class="flex flex-col items-center text-center fade-in-section">
+                    <div class="relative w-full max-w-md cursor-pointer group" data-modal-trigger
+                        data-title-pt="1. Esterilização por Ciclo Térmico"
+                        data-description-pt="Os tecidos são submetidos a um processo térmico (acima de 121°C) em um módulo de 'lavagem a seco' para esterilização, garantindo que as fibras sejam seguras para reutilização no habitat."
+                        data-title-en="1. Thermal Cycle Sterilization"
+                        data-description-en="Fabrics undergo a thermal process (above 121°C) in a 'dry cleaning' module for sterilization, ensuring the fibers are safe for reuse in the habitat.">
+                        <div
+                            class="absolute -inset-1.5 bg-gradient-to-r from-orange-600 to-amber-500 rounded-lg blur opacity-50">
+                        </div>
+                        <div class="relative p-6 bg-slate-900/80 rounded-lg border border-slate-700 shadow-2xl">
+                            <div class="w-full max-w-sm mx-auto mb-4 relative group">
+                                <svg viewBox="0 0 100 80" class="w-full h-auto" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="100" height="80" rx="4" fill="transparent" />
+                                    <!-- Machine Body -->
+                                    <rect x="10" y="15" width="80" height="60" rx="4" fill="#1e293b" />
+                                    <!-- Window -->
+                                    <rect x="25" y="25" width="50" height="30" rx="2" fill="#0f172a" stroke="#475569"
+                                        stroke-width="1" />
+                                    <!-- Textiles inside -->
+                                    <path d="M30 50 q5 -8 10 0 t10 0 t10 0 t10 0" stroke="#a855f7" stroke-width="1.5"
+                                        fill="none" />
+                                    <path d="M32 45 q5 8 10 0 t10 0 t10 0" stroke="#60a5fa" stroke-width="1.5"
+                                        fill="none" />
+                                    <path d="M35 40 q5 -8 10 0 t10 0" stroke="#f472b6" stroke-width="1.5" fill="none" />
+                                    <!-- Heat Waves (Animation) -->
+                                    <g class="animate-pulse-glow" style="animation-duration: 3s;">
+                                        <path d="M30 35 q5 -5 10 0 t10 0 t10 0" stroke="#f97316" stroke-width="1"
+                                            fill="none" opacity="0.8" />
+                                        <path d="M35 30 q5 -5 10 0 t10 0" stroke="#f97316" stroke-width="1" fill="none"
+                                            opacity="0.6" style="animation-delay: -0.5s;" />
+                                    </g>
+                                    <!-- Control Panel -->
+                                    <rect x="80" y="20" width="15" height="40" fill="#2d3748" rx="2" />
+                                    <circle cx="87.5" cy="30" r="3" fill="#f87171" class="animate-pulse-glow" />
+                                    <rect x="84" y="40" width="7" height="15" fill="#0f172a" />
+                                </svg>
+                                <div
+                                    class="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                                    <span id="textile-details-1"
+                                        class="text-white font-display font-bold text-xl tracking-wider flex items-center gap-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+                                            <circle cx="11" cy="11" r="8"></circle>
+                                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                        </svg>
+                                        Ver Detalhes
+                                    </span>
+                                </div>
+                            </div>
+                            <h3 id="textile-step1-title" class="font-display text-2xl font-semibold text-orange-300">1.
+                                Esterilização por Ciclo Térmico</h3>
+                            <p id="textile-step1-desc" class="text-slate-400 leading-relaxed mt-2">Higienização dos
+                                tecidos em alta temperatura para garantir a segurança no reaproveitamento.</p>
+                        </div>
+                    </div>
+                    <svg class="w-12 h-12 text-slate-600 mt-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="M19 14l-7 7m0 0l-7-7m7 7V3">
+                        </path>
+                    </svg>
+                </div>
+
+                <!-- Divisão em Duas Rotas -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+
+                    <!-- Rota A: Não Sintéticos -->
+                    <div
+                        class="fade-in-section space-y-8 border border-green-500/30 rounded-xl p-8 bg-slate-900/40 shadow-xl shadow-green-900/20 flex flex-col">
+                        <h4 id="textile-route-a" class="font-display text-3xl font-bold text-center text-green-400">Rota
+                            A: Fibras Naturais</h4>
+                        <div class="flex flex-col items-center text-center group" data-modal-trigger
+                            data-title-pt="2A. Desfibramento Mecânico"
+                            data-description-pt="Fibras como algodão são processadas em um triturador (aprox. 15 kg) que desfaz a trama do tecido, retornando-o a fibras individuais (algodão em rama) para reprocessamento."
+                            data-title-en="2A. Mechanical Defibering"
+                            data-description-en="Fibers like cotton are processed in a shredder (approx. 15 kg) that breaks down the fabric's weave, returning it to individual fibers (raw cotton) for reprocessing.">
+                            <div class="w-full max-w-sm cursor-pointer">
+                                <div class="p-4 rounded-lg relative group">
+                                    <svg viewBox="0 0 100 80" class="w-full h-auto" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="100" height="80" rx="4" fill="transparent" />
+                                        <path d="M20 20 H 80 V 60 H 20 Z" fill="#1e293b" />
+                                        <g class="animate-rotate-gear" style="animation-duration: 2s;">
+                                            <path d="M35 30 L 65 30 L 60 50 L 40 50 Z" fill="#4ade80" />
+                                        </g>
+                                        <path d="M10 40 H 20 M80 40 H 90" stroke="#cbd5e0" stroke-width="2" />
+                                        <circle cx="20" cy="40" r="3" fill="#cbd5e0" />
+                                        <circle cx="80" cy="40" r="3" fill="#cbd5e0" />
+                                    </svg>
+                                    <div
+                                        class="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                                        <span id="textile-details-2a"
+                                            class="text-white font-display font-bold text-xl tracking-wider flex items-center gap-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+                                                <circle cx="11" cy="11" r="8"></circle>
+                                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                            </svg>
+                                            Ver Detalhes
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="mt-2">
+                                    <h3 id="textile-step2a-title"
+                                        class="font-display text-xl font-semibold text-green-300">2A. Desfibramento
+                                        Mecânico</h3>
+                                    <p id="textile-step2a-desc" class="text-slate-400 text-sm">Tecidos de algodão são
+                                        triturados, retornando ao estado de fibras soltas.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <svg class="w-8 h-8 text-slate-500 mx-auto" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                        </svg>
+                        <div class="flex flex-col items-center text-center group" data-modal-trigger
+                            data-title-pt="3A. Consolidação por Agulhagem"
+                            data-description-pt="As fibras soltas são entrelaçadas mecanicamente por agulhas farpadas em um módulo de agulhagem, criando um feltro não-tecido. Uma leve prensagem térmica confere estabilidade à manta."
+                            data-title-en="3A. Needle-Punching Consolidation"
+                            data-description-en="The loose fibers are mechanically interlaced by barbed needles in a needle-punching module, creating a non-woven felt. A light thermal pressing provides stability to the mat.">
+                            <div class="w-full max-w-sm cursor-pointer">
+                                <div class="p-4 rounded-lg relative group">
+                                    <svg viewBox="0 0 100 80" class="w-full h-auto" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="100" height="80" rx="4" fill="transparent" />
+                                        <g class="animate-needle-press">
+                                            <rect x="30" y="10" width="40" height="15" fill="#475569" />
+                                            <g fill="#cbd5e0">
+                                                <rect x="35" y="25" width="2" height="10" />
+                                                <rect x="45" y="25" width="2" height="10" />
+                                                <rect x="55" y="25" width="2" height="10" />
+                                                <rect x="65" y="25" width="2" height="10" />
+                                            </g>
+                                        </g>
+                                        <rect x="20" y="40" width="60" height="20" fill="#10b981" opacity="0.6" />
+                                    </svg>
+                                    <div
+                                        class="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                                        <span id="textile-details-3a"
+                                            class="text-white font-display font-bold text-xl tracking-wider flex items-center gap-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+                                                <circle cx="11" cy="11" r="8"></circle>
+                                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                            </svg>
+                                            Ver Detalhes
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="mt-2">
+                                    <h3 id="textile-step3a-title"
+                                        class="font-display text-xl font-semibold text-green-300">3A. Consolidação por
+                                        Agulhagem</h3>
+                                    <p id="textile-step3a-desc" class="text-slate-400 text-sm">Fibras são entrelaçadas
+                                        mecanicamente para formar mantas coesas.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-auto text-center bg-green-900/50 p-4 rounded-lg">
+                            <p id="textile-product-a-label" class="font-display text-lg font-semibold text-green-200">
+                                Produto Final:</p>
+                            <p id="textile-product-a-desc" class="text-slate-300">Mantas de feltro para isolamento
+                                térmico e acústico.</p>
+                        </div>
+                    </div>
+
+                    <!-- Rota B: Sintéticos -->
+                    <div
+                        class="fade-in-section space-y-8 border border-blue-500/30 rounded-xl p-8 bg-slate-900/40 shadow-xl shadow-blue-900/20 flex flex-col">
+                        <h4 id="textile-route-b" class="font-display text-3xl font-bold text-center text-blue-400">Rota
+                            B: Fibras Sintéticas</h4>
+                        <div class="flex flex-col items-center text-center group" data-modal-trigger
+                            data-title-pt="2B. Termofixação por Compressão"
+                            data-description-pt="Tecidos sintéticos (poliéster, nylon) são submetidos a calor e pressão em uma prensa térmica (massa aprox. 35 kg). O processo funde parcialmente as fibras, unindo-as para formar painéis sólidos e rígidos."
+                            data-title-en="2B. Thermo-setting by Compression"
+                            data-description-en="Synthetic fabrics (polyester, nylon) are subjected to heat and pressure in a thermal press (approx. mass 35 kg). The process partially melts the fibers, bonding them together to form solid, rigid panels.">
+                            <div class="w-full max-w-sm cursor-pointer">
+                                <div class="p-4 rounded-lg relative group">
+                                    <svg viewBox="0 0 100 80" class="w-full h-auto" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="100" height="80" rx="4" fill="transparent" />
+                                        <rect x="20" y="10" width="60" height="8" rx="2" fill="#4a5568" />
+                                        <rect x="20" y="62" width="60" height="8" rx="2" fill="#4a5568" />
+                                        <g class="animate-forge-press" style="animation-duration: 2.5s;">
+                                            <path d="M 30 18 L 70 18 L 65 30 H 35 Z" fill="#718096" />
+                                        </g>
+                                        <path d="M 30 62 L 70 62 L 75 50 H 25 Z" fill="#718096" />
+                                        <rect x="30" y="35" width="40" height="10" fill="#2563eb"
+                                            class="animate-pulse-glow" style="animation-duration: 2.5s;" />
+                                    </svg>
+                                    <div
+                                        class="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                                        <span id="textile-details-2b"
+                                            class="text-white font-display font-bold text-xl tracking-wider flex items-center gap-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+                                                <circle cx="11" cy="11" r="8"></circle>
+                                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                            </svg>
+                                            Ver Detalhes
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="mt-2">
+                                    <h3 id="textile-step2b-title"
+                                        class="font-display text-xl font-semibold text-blue-300">2B. Termofixação por
+                                        Compressão</h3>
+                                    <p id="textile-step2b-desc" class="text-slate-400 text-sm">Tecidos sintéticos são
+                                        prensados a quente para fusão parcial das fibras.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-auto text-center bg-blue-900/50 p-4 rounded-lg">
+                            <p id="textile-product-b-label" class="font-display text-lg font-semibold text-blue-200">
+                                Produto Final:</p>
+                            <p id="textile-product-b-desc" class="text-slate-300">Painéis rígidos para revestimentos,
+                                divisórias ou componentes estruturais.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Etapa Final Comum -->
+                <div class="flex flex-col items-center text-center fade-in-section pt-8">
+                    <svg class="w-12 h-12 text-slate-600 mb-8 transform rotate-180" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="M5 10l7-7m0 0l7 7m-7-7v18">
+                        </path>
+                    </svg>
+                    <div class="relative w-full max-w-xl cursor-pointer group" data-modal-trigger
+                        data-title-pt="Etapa Final: Usinagem CNC e Acabamento"
+                        data-description-pt="Mantas e painéis são processados em uma máquina de corte CNC de alta precisão. Este módulo leve corta as peças nos formatos desejados para aplicações no habitat, como painéis de isolamento ou componentes de mobília."
+                        data-title-en="Final Stage: CNC Machining and Finishing"
+                        data-description-en="Mats and panels are processed in a high-precision CNC cutting machine. This lightweight module cuts the pieces into the desired shapes for habitat applications, such as insulation panels or furniture components.">
+                        <div
+                            class="absolute -inset-1.5 bg-gradient-to-r from-yellow-600 to-amber-500 rounded-lg blur opacity-50 group-hover:opacity-75 transition duration-500">
+                        </div>
+                        <div class="relative p-6 md:p-8 bg-slate-900/80 rounded-lg border border-slate-700 shadow-2xl">
+                            <div class="w-full max-w-sm mx-auto mb-6 relative group">
+                                <svg viewBox="0 0 100 80" class="w-full h-auto" xmlns="http://www.w3.org/2000/svg">
+                                    <!-- CNC Machine Base -->
+                                    <rect x="5" y="65" width="90" height="10" fill="#2d3748" rx="2" />
+                                    <rect x="10" y="62" width="80" height="5" fill="#475569" />
+                                    <!-- Material on the bed -->
+                                    <rect x="15" y="45" width="70" height="18" fill="#1e293b" rx="1" />
+                                    <rect x="15" y="45" width="35" height="18" fill="#10b981" opacity="0.6" rx="1" />
+                                    <!-- Green for non-synthetic -->
+                                    <rect x="50" y="45" width="35" height="18" fill="#2563eb" opacity="0.6" rx="1" />
+                                    <!-- Blue for synthetic -->
+                                    <!-- Gantry -->
+                                    <rect x="5" y="15" width="90" height="5" fill="#718096" rx="1" />
+                                    <!-- Cutting Head animated -->
+                                    <g class="animate-print-head" style="animation-duration: 6s;">
+                                        <g transform="translate(40, 17.5)">
+                                            <rect y="0" width="10" height="20" fill="#cbd5e0" rx="1" />
+                                            <path d="M5 20 l-3 5 l6 0 Z" fill="#facc15" />
+                                            <path class="animate-electric-spark" style="animation-delay: 0.2s"
+                                                d="M5 25 l-2 2 l2 2" stroke="#fde047" stroke-width="1" />
+                                        </g>
+                                    </g>
+                                    <!-- Cut lines on material -->
+                                    <path d="M 20 50 c 5 -5 10 -5 15 0" stroke="white" stroke-width="0.5" fill="none"
+                                        stroke-dasharray="2 2" />
+                                    <path d="M 60 55 a 5 5 0 0 1 10 0" stroke="white" stroke-width="0.5" fill="none"
+                                        stroke-dasharray="2 2" />
+                                </svg>
+                                <div
+                                    class="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                                    <span id="textile-details-final"
+                                        class="text-white font-display font-bold text-xl tracking-wider flex items-center gap-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+                                            <circle cx="11" cy="11" r="8"></circle>
+                                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                        </svg>
+                                        Ver Detalhes
+                                    </span>
+                                </div>
+                            </div>
+                            <h3 id="textile-step-final-title"
+                                class="font-display text-3xl font-semibold text-yellow-300">Etapa Final: Usinagem CNC e
+                                Acabamento</h3>
+                            <p id="textile-step-final-desc"
+                                class="text-slate-400 leading-relaxed mt-2 max-w-lg mx-auto">Mantas e painéis são
+                                moldados em peças precisas para uso no habitat.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="w-full relative pt-20">
+            <!-- Floating Metal Background Elements -->
+            <div class="absolute inset-0 overflow-hidden">
+                <!-- Elementos flutuantes de metal... -->
+            </div>
+            <div class="text-center mb-20 fade-in-section">
+                <h2 id="metal-title"
+                    class="font-display text-center text-3xl sm:text-4xl font-extrabold text-white mb-4">Reciclagem de
+                    Ligas Metálicas para Manufatura Aditiva (WAAM)</h2>
+                <p id="metal-subtitle" class="text-slate-400 max-w-2xl mx-auto">Um fluxograma para transformar sucata de
+                    alumínio em arame de alta qualidade para impressão 3D (Wire Arc Additive Manufacturing).</p>
+            </div>
+
+            <!-- Organograma de Metais -->
+            <div class="max-w-7xl mx-auto px-6 flex flex-col items-center space-y-4">
+                <!-- Etapa 1: Central -->
+                <div class="fade-in-section group flex flex-col items-center text-center">
+                    <div class="p-4 w-full max-w-xs bg-slate-900/50 rounded-lg border border-slate-700/50 shadow-2xl transition-all duration-300 group-hover:border-cyan-400/50 group-hover:scale-105 cursor-pointer relative group"
+                        data-modal-trigger data-title-pt="1. Triagem e Classificação de Ligas"
+                        data-description-pt="Sucata de alumínio é inspecionada. A triagem manual e magnética separa o alumínio de outros metais e contaminantes, garantindo a pureza do material."
+                        data-title-en="1. Alloy Sorting and Classification"
+                        data-description-en="Aluminum scrap is inspected. Manual and magnetic sorting separates aluminum from other metals and contaminants, ensuring material purity.">
+                        <svg viewBox="0 0 100 80" class="w-full h-auto" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="100" height="80" rx="4" fill="#0f172a" />
+                            <path d="M10 70 L 25 50 L 40 65 L 50 70 Z" fill="#64748b" />
+                            <path d="M60 70 L 70 60 L 85 68 L 90 70 Z" fill="#94a3b8" />
+                            <path d="M 30 20 L 70 20 L 75 30 L 25 30 Z" fill="#475569" />
+                            <path d="M 40 30 V 70" stroke="#475569" stroke-width="4" />
+                            <path d="M 40 35 a 15 15 0 0 1 30 0" stroke="#f87171" stroke-width="2" fill="none" />
+                            <path d="M 40 45 a 25 25 0 0 1 50 0" stroke="#f87171" stroke-width="1.5" fill="none"
+                                opacity="0.6" />
+                        </svg>
+                        <div
+                            class="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                            <span id="metal-details-1"
+                                class="text-white font-display font-bold text-xl tracking-wider flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="w-6 h-6">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                </svg>
+                                Ver Detalhes
+                            </span>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <h3 id="metal-step1-title" class="font-display text-xl font-semibold text-cyan-300">1. Triagem e
+                            Classificação de Ligas</h3>
+                        <p id="metal-step1-desc" class="text-slate-400 leading-relaxed text-sm">Separação de ligas de
+                            alumínio e remoção de contaminantes.</p>
+                    </div>
+                </div>
+
+                <!-- Setas de Bifurcação -->
+                <div class="w-full flex justify-center">
+                    <svg class="w-full max-w-lg h-12 text-slate-500" fill="none" viewBox="0 0 100 50"
+                        stroke="currentColor" preserveAspectRatio="none">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                            d="M50 0 V15 M50 15 L15 35 M50 15 L85 35 M15 35 V45 M85 35 V45"></path>
+                    </svg>
+                </div>
+
+                <!-- Rotas Ramificadas -->
+                <div class="w-full grid md:grid-cols-2 gap-x-16 gap-y-12">
+
+                    <!-- Rota A: Destroços -->
+                    <div class="flex flex-col items-center space-y-4 text-center">
+                        <p id="metal-route-a" class="font-display text-lg text-lime-300">Sucata Leve</p>
+                        <div class="fade-in-section group w-full max-w-xs">
+                            <div class="p-4 bg-slate-900/50 rounded-lg border border-slate-700/50 shadow-2xl transition-all duration-300 group-hover:border-lime-400/50 group-hover:scale-105 cursor-pointer relative group"
+                                data-modal-trigger data-title-pt="2A. Trituração de Sucata Leve"
+                                data-description-pt="Um triturador industrial (massa aprox. 80 kg) processa destroços e embalagens, cortando o metal em fragmentos (flakes) de 1-3 cm para otimizar a compactação."
+                                data-title-en="2A. Light Scrap Shredding"
+                                data-description-en="An industrial shredder (approx. mass 80 kg) processes debris and packaging, cutting the metal into 1-3 cm flakes to optimize compaction.">
+                                <svg viewBox="0 0 100 80" class="w-full h-auto" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="100" height="80" rx="4" fill="#0f172a" />
+                                    <g>
+                                        <path d="M 20 10 H 80 V 70 H 20 Z" fill="#475569" />
+                                        <path d="M 20 10 L 15 15 V 75 L 20 70" fill="#64748b" />
+                                        <path d="M 80 10 L 85 15 V 75 L 80 70" fill="#64748b" />
+                                        <rect x="25" y="5" width="50" height="10" fill="#2d3748" />
+                                    </g>
+                                    <rect x="30" y="65" width="40" height="15" fill="#2d3748" rx="2" />
+                                    <g class="animate-rotate-gear"
+                                        style="animation-duration: 3s; transform-origin: 50px 40px;">
+                                        <path d="M50 25l-5 10h10z" fill="#94a3b8" />
+                                        <path d="M40 35l10 10l10-10z" fill="#94a3b8" />
+                                        <path d="M50 55l5-10h-10z" fill="#94a3b8" />
+                                        <path d="M60 45l-10-10l-10 10z" fill="#94a3b8" />
+                                        <circle cx="50" cy="40" r="5" fill="#e2e8f0" />
+                                    </g>
+                                </svg>
+                                <div
+                                    class="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                                    <span id="metal-details-2a"
+                                        class="text-white font-display font-bold text-xl tracking-wider flex items-center gap-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+                                            <circle cx="11" cy="11" r="8"></circle>
+                                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                        </svg>
+                                        Ver Detalhes
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <h3 id="metal-step2a-title" class="font-display text-xl font-semibold text-lime-300">2A.
+                                    Trituração de Sucata Leve</h3>
+                                <p id="metal-step2a-desc" class="text-slate-400 leading-relaxed text-sm">Redução de
+                                    destroços e embalagens a flakes.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rota B: Peças Íntegras -->
+                    <div class="flex flex-col items-center space-y-4 text-center">
+                        <p id="metal-route-b" class="font-display text-lg text-sky-300">Componentes Estruturais</p>
+                        <div class="fade-in-section group w-full max-w-xs">
+                            <div class="p-4 bg-slate-900/50 rounded-lg border border-slate-700/50 shadow-2xl transition-all duration-300 group-hover:border-sky-400/50 group-hover:scale-105 cursor-pointer relative group"
+                                data-modal-trigger data-title-pt="2B. Seccionamento de Componentes"
+                                data-description-pt="Peças maiores, como vigas, são cortadas em pedaços de 5-20 mm por uma serra de fita. O módulo é projetado para ser leve (aprox. 45 kg) e de fácil manutenção."
+                                data-title-en="2B. Component Sectioning"
+                                data-description-en="Larger parts, such as beams, are cut into 5-20 mm pieces by a band saw. The module is designed to be lightweight (approx. 45 kg) and easy to maintain.">
+                                <svg viewBox="0 0 100 80" class="w-full h-auto" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="100" height="80" rx="4" fill="#0f172a" />
+                                    <path d="M10 70 V 20 H 90 V 70" fill="#475569" />
+                                    <rect x="5" y="45" width="90" height="8" fill="#2d3748" rx="2" />
+                                    <circle cx="50" cy="30" r="10" stroke="#94a3b8" stroke-width="2"
+                                        stroke-dasharray="50" class="animate-rotate-gear"
+                                        style="animation-duration: 4s; stroke-dasharray: 40 22;" />
+                                    <path d="M 20 45 L 80 45" stroke-width="2" stroke="#94a3b8" stroke-dasharray="4"
+                                        style="animation: saw-blade-move 1s linear infinite;" />
+                                </svg>
+                                <div
+                                    class="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                                    <span id="metal-details-2b"
+                                        class="text-white font-display font-bold text-xl tracking-wider flex items-center gap-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+                                            <circle cx="11" cy="11" r="8"></circle>
+                                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                        </svg>
+                                        Ver Detalhes
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <h3 id="metal-step2b-title" class="font-display text-xl font-semibold text-sky-300">2B.
+                                    Seccionamento de Componentes</h3>
+                                <p id="metal-step2b-desc" class="text-slate-400 leading-relaxed text-sm">Corte de peças
+                                    estruturais em fragmentos.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Setas Convergentes -->
+                <div class="w-full flex justify-center">
+                    <svg class="w-full max-w-lg h-12 text-slate-500" fill="none" viewBox="0 0 100 50"
+                        stroke="currentColor" preserveAspectRatio="none">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                            d="M25 0 V15 L50 35 M75 0 V15 L50 35 M50 35 V50"></path>
+                    </svg>
+                </div>
+
+                <!-- Etapa de Convergência: Prensa Hidráulica -->
+                <div class="fade-in-section group flex flex-col items-center text-center">
+                    <div class="p-4 w-full max-w-xs bg-slate-900/50 rounded-lg border border-slate-700/50 shadow-2xl transition-all duration-300 group-hover:border-red-400/50 group-hover:scale-105 cursor-pointer relative group"
+                        data-modal-trigger data-title-pt="3. Briquetagem por Prensagem"
+                        data-description-pt="Os fragmentos de alumínio são compactados em uma prensa hidráulica (massa aprox. 120 kg), que os transforma em briquetes densos para otimizar a fusão na etapa seguinte."
+                        data-title-en="3. Briquetting by Pressing"
+                        data-description-en="The aluminum fragments are compacted in a hydraulic press (approx. mass 120 kg), which turns them into dense briquettes to optimize melting in the next stage.">
+                        <svg viewBox="0 0 100 80" class="w-full h-auto" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="100" height="80" rx="4" fill="#0f172a" />
+                            <rect x="20" y="10" width="60" height="8" rx="2" fill="#4a5568" />
+                            <rect x="20" y="62" width="60" height="8" rx="2" fill="#4a5568" />
+                            <g class="animate-forge-press" style="animation-duration: 2s;">
+                                <path d="M 30 18 L 70 18 L 65 30 H 35 Z" fill="#718096" />
+                            </g>
+                            <path d="M 30 62 L 70 62 L 75 50 H 25 Z" fill="#718096" />
+                            <g class="animate-pulse-glow">
+                                <rect x="35" y="35" width="30" height="10" fill="#e2e8f0" rx="1" />
+                            </g>
+                        </svg>
+                        <div
+                            class="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                            <span id="metal-details-3"
+                                class="text-white font-display font-bold text-xl tracking-wider flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="w-6 h-6">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                </svg>
+                                Ver Detalhes
+                            </span>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <h3 id="metal-step3-title" class="font-display text-xl font-semibold text-red-300">3.
+                            Briquetagem por Prensagem</h3>
+                        <p id="metal-step3-desc" class="text-slate-400 leading-relaxed text-sm">Compactação dos
+                            fragmentos em briquetes densos.</p>
+                    </div>
+                </div>
+
+                <!-- Seta para baixo -->
+                <svg class="w-8 h-8 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+
+                <!-- Etapa 7: Mini Extrusora -->
+                <div class="fade-in-section group flex flex-col items-center text-center">
+                    <div class="p-4 w-full max-w-xs bg-slate-900/50 rounded-lg border border-slate-700/50 shadow-2xl transition-all duration-300 group-hover:border-purple-400/50 group-hover:scale-105 cursor-pointer relative group"
+                        data-modal-trigger data-title-pt="4. Extrusão a Quente"
+                        data-description-pt="Os briquetes são aquecidos e forçados através de uma matriz em uma extrusora compacta, transformando-os em varetas contínuas de alumínio."
+                        data-title-en="4. Hot Extrusion"
+                        data-description-en="The briquettes are heated and forced through a die in a compact extruder, turning them into continuous aluminum rods.">
+                        <svg viewBox="0 0 100 80" class="w-full h-auto" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="100" height="80" rx="4" fill="#0f172a" />
+                            <path d="M5 20 H 95 V 70 H 5 Z" fill="#2d3748" />
+                            <path d="M20 10 L 35 20 H 20 Z" fill="#60a5fa" />
+                            <rect x="35" y="20" width="30" height="15" fill="#4338ca" />
+                            <rect x="65" y="20" width="15" height="15" fill="#718096" rx="2" />
+                            <path d="M25 35 H 85" stroke="#475569" stroke-width="4" />
+                            <rect x="85" y="32.5" width="10" height="5" rx="1" fill="#94a3b8" />
+                            <g class="animate-pulse-glow" style="animation-direction: reverse;">
+                                <circle cx="30" cy="50" r="8" fill="#e2e8f0">
+                                    <animateTransform attributeName="transform" type="rotate" from="0 30 50"
+                                        to="360 30 50" dur="2s" repeatCount="indefinite" />
+                                </circle>
+                            </g>
+                        </svg>
+                        <div
+                            class="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                            <span id="metal-details-4"
+                                class="text-white font-display font-bold text-xl tracking-wider flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="w-6 h-6">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                </svg>
+                                Ver Detalhes
+                            </span>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <h3 id="metal-step4-title" class="font-display text-xl font-semibold text-purple-300">4.
+                            Extrusão a Quente</h3>
+                        <p id="metal-step4-desc" class="text-slate-400 leading-relaxed text-sm">Formação de varetas de
+                            alumínio a partir dos briquetes.</p>
+                    </div>
+                </div>
+
+                <!-- Seta para baixo -->
+                <svg class="w-8 h-8 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+
+                <!-- Etapa 8: Trefilador e Bobinador -->
+                <div class="fade-in-section group flex flex-col items-center text-center">
+                    <div class="p-4 w-full max-w-xs bg-slate-900/50 rounded-lg border border-slate-700/50 shadow-2xl transition-all duration-300 group-hover:border-pink-400/50 group-hover:scale-105 cursor-pointer relative group"
+                        data-modal-trigger data-title-pt="5. Trefilação e Bobinamento"
+                        data-description-pt="As varetas são esticadas através de matrizes (trefilação) para atingir o diâmetro do arame de solda. O arame final é enrolado em bobinas para uso na célula WAAM."
+                        data-title-en="5. Drawing and Winding"
+                        data-description-en="The rods are drawn through dies (drawing process) to achieve the required wire diameter for welding. The final wire is wound onto spools for use in the WAAM cell.">
+                        <svg viewBox="0 0 100 80" class="w-full h-auto" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="100" height="80" rx="4" fill="#0f172a" />
+                            <path d="M 5 60 H 95 V 70 H 5 Z" fill="#2d3748" />
+                            <path d="M 10 60 V 40 H 25 V 60 Z M 75 60 V 30 H 90 V 60 Z M 45 60 V 50 H 55 V 60 Z"
+                                fill="#475569" />
+                            <path d="M 10 38 L 25 38" stroke="#475569" stroke-width="2" />
+                            <path d="M 22 25 H 32 V 35 H 22 Z" fill="#718096" />
+                            <circle cx="27" cy="30" r="3" fill="#94a3b8" class="animate-rotate-gear-rev" />
+                            <rect x="0" y="39" width="22" height="2" fill="#e2e8f0" />
+                            <line x1="32" y1="30" x2="48" y2="30" stroke="#e2e8f0" stroke-width="2" />
+                            <circle cx="50" cy="30" r="8" fill="#94a3b8" class="animate-rotate-gear" />
+                            <path d="M 58 30 H 78" stroke="#e2e8f0" stroke-width="2" />
+                            <g transform="translate(82.5 30)">
+                                <circle cx="0" cy="0" r="10" fill="#60a5fa" class="animate-rotate-gear" />
+                                <path d="M 0 -7 L 0 7 M -7 0 L 7 0" stroke="#4338ca" stroke-width="1.5" />
+                            </g>
+                        </svg>
+                        <div
+                            class="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                            <span id="metal-details-5"
+                                class="text-white font-display font-bold text-xl tracking-wider flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="w-6 h-6">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                </svg>
+                                Ver Detalhes
+                            </span>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <h3 id="metal-step5-title" class="font-display text-xl font-semibold text-pink-300">5.
+                            Trefilação e Bobinamento</h3>
+                        <p id="metal-step5-desc" class="text-slate-400 leading-relaxed text-sm">Produção do arame de
+                            alumínio no diâmetro final.</p>
+                    </div>
+                </div>
+
+                <!-- Seta para baixo -->
+                <svg class="w-8 h-8 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+
+                <!-- Etapa 9: Célula WAAM -->
+                <div class="fade-in-section group flex flex-col items-center text-center">
+                    <div class="p-4 w-full max-w-xs bg-slate-900/50 rounded-lg border border-slate-700/50 shadow-2xl transition-all duration-300 group-hover:border-teal-400/50 group-hover:scale-105 cursor-pointer relative group"
+                        data-modal-trigger data-title-pt="6. Manufatura Aditiva por Arco a Arame (WAAM)"
+                        data-description-pt="A bobina de arame é usada em uma célula de impressão WAAM. Um braço robótico deposita o metal fundido por arco elétrico para construir peças metálicas. Com massa total de aprox. 150 kg, esta célula é o coração da manufatura metálica autônoma."
+                        data-title-en="6. Wire Arc Additive Manufacturing (WAAM)"
+                        data-description-en="The wire spool is used in a WAAM printing cell. A robotic arm deposits the molten metal from an electric arc to build metal parts. With a total mass of approx. 150 kg, this cell is the heart of autonomous metal manufacturing.">
+                        <svg viewBox="0 0 100 80" class="w-full h-auto" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="100" height="80" rx="4" fill="#0f172a" />
+
+                            <!-- Base e Trilhos -->
+                            <path d="M 2 78 L 40 60 L 98 70 L 60 88 Z" fill="#2d3748" />
+                            <path d="M 5 76 L 41 59 M 55 85 L 95 68" stroke="#475569" stroke-width="1" />
+
+                            <!-- Estrutura da Célula (Fundo e Cortina) -->
+                            <path d="M 2 78 V 28 L 40 10 V 60 Z" fill="#1e293b" stroke="#475569" stroke-width="0.5" />
+                            <rect x="10" y="18" width="22" height="15" fill="#0f172a" stroke="#475569"
+                                stroke-width="0.5" />
+                            <path d="M 40 10 L 80 20 V 60 L 40 60 Z" fill="#60a5fa" opacity="0.1" />
+
+                            <!-- Gantry e Cabeça de Impressão -->
+                            <g>
+                                <path d="M 75 62 V 12 L 80 10 V 60 Z" fill="#60a5fa" />
+                                <path d="M 77 11 L 40 22" stroke="#4338ca" stroke-width="0.5" />
+                                <g class="animate-print-head" style="animation-duration: 6s;">
+                                    <g transform="translate(55, 23)">
+                                        <path d="M -5 0 H 5 V 5 L 0 10 L -5 5 Z" fill="#4338ca" />
+                                        <path d="M 0 10 L 0 18" stroke="#cbd5e0" stroke-width="1" />
+                                        <path class="animate-electric-spark" d="M -2 18 l 2 2 l -2 2 l 2 2"
+                                            stroke="#fde047" stroke-width="1.5" />
+                                    </g>
+                                </g>
+                            </g>
+
+                            <!-- Mesa e Peça -->
+                            <g transform="translate(42, 52)">
+                                <path d="M 0 0 L 15 -8 L 30 0 L 15 8 Z" fill="#718096" />
+                                <path d="M 0 0 V 10 L 15 18 V 8 Z" fill="#475569" />
+                                <path d="M 30 0 V 10 L 15 18 V 8 Z" fill="#64748b" />
+                                <!-- Peça sendo construída -->
+                                <g transform="translate(7.5, -5)">
+                                    <rect x="0" y="0" width="15" height="1" fill="#e2e8f0" opacity="0.4"
+                                        transform="skewX(-30)" />
+                                    <rect x="0" y="-2" width="15" height="1" fill="#e2e8f0" opacity="0.6"
+                                        transform="skewX(-30)" />
+                                    <path class="animate-print-build" style="animation-delay: -1s; stroke-dasharray: 20"
+                                        d="M 0 -4 H 15" stroke="#fff" stroke-width="1" transform="skewX(-30)" />
+                                    <path class="animate-print-build" style="animation-delay: -3s; stroke-dasharray: 15"
+                                        d="M 0 -5 H 10" stroke="#fff" stroke-width="1" transform="skewX(-30)" />
+                                </g>
+                            </g>
+
+                            <!-- Cilindro de Gás -->
+                            <g transform="translate(85, 38)">
+                                <rect y="0" width="8" height="30" rx="4" fill="#718096" />
+                                <rect x="1" y="-3" width="6" height="4" fill="#475569" />
+                                <rect x="3" y="-5" width="2" height="2" fill="#94a3b8" />
+                                <path d="M 3 0 C 0 5, 0 10, 3 15" fill="none" stroke-width="0.5" stroke="#94a3b8" />
+                            </g>
+
+                            <!-- Bobina de Arame -->
+                            <g transform="translate(60, 75)">
+                                <circle cx="0" cy="0" r="7" fill="#60a5fa" />
+                                <circle cx="0" cy="0" r="5" fill="#4338ca" class="animate-rotate-gear" />
+                                <circle cx="0" cy="0" r="1" fill="#818cf8" />
+                            </g>
+
+                            <!-- Mangueiras -->
+                            <path d="M 60 75 C 50 65, 50 55, 55 45 C 58 40, 58 35, 55 30" fill="none" stroke="#94a3b8"
+                                stroke-width="0.7" />
+                            <path d="M 85 45 C 80 40, 75 35, 78 28 C 81 21, 78 15, 76 13" fill="none" stroke="#94a3b8"
+                                stroke-width="0.7" />
+                        </svg>
+                        <div
+                            class="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                            <span id="metal-details-6"
+                                class="text-white font-display font-bold text-xl tracking-wider flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="w-6 h-6">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                </svg>
+                                Ver Detalhes
+                            </span>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <h3 id="metal-step6-title" class="font-display text-xl font-semibold text-teal-300">6.
+                            Manufatura Aditiva (WAAM)</h3>
+                        <p id="metal-step6-desc" class="text-slate-400 leading-relaxed text-sm">Impressão 3D de peças
+                            metálicas a partir do arame reciclado.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center bg-black/30 text-slate-400 py-8 px-4 mt-16 border-t border-slate-700">
+            <div class="max-w-4xl mx-auto">
+                <p id="footer-desc" class="mb-2">Landing page desenvolvida para o Hackathon Nasa Space Apps Uberlândia.
+                </p>
+                <p id="footer-team" class="mb-4 text-slate-300 font-semibold">Guris de Marte Team</p>
+                <a href="mailto:danilo.honorio@ufu.br" id="footer-contact"
+                    class="inline-block bg-orange-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-orange-500 transition-colors duration-300 my-4 shadow-lg shadow-orange-600/20">
+                    Contato
+                </a>
+                <p id="footer-copy" class="mt-4 text-xs opacity-70">&copy; 2025 Guris de Marte. Todos os direitos
+                    reservados.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modal Container -->
+    <div id="imageModal"
+        class="fixed inset-0 z-[60] hidden items-center justify-center bg-black/80 p-4 transition-opacity duration-300 ease-in-out">
+        <div id="modalContent"
+            class="relative w-full max-w-3xl rounded-lg bg-slate-900 border border-orange-500/30 shadow-2xl transition-transform duration-300 ease-in-out scale-95 opacity-0">
+            <div class="p-6">
+                <div class="flex justify-between items-start border-b border-slate-700 pb-4 mb-4">
+                    <h3 id="modalTitle" class="font-display text-2xl font-bold text-orange-300"></h3>
+                    <button id="closeModal"
+                        class="text-slate-400 hover:text-white transition-colors text-4xl leading-none -mt-2">&times;</button>
+                </div>
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div id="modalImageContainer" class="w-full md:w-1/2 p-2 bg-black/20 rounded-md">
+                        <!-- SVG will be injected here -->
+                    </div>
+                    <div class="w-full md:w-1/2">
+                        <p id="modalDescription" class="text-slate-300 leading-relaxed"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById('imageModal');
+            const modalContent = document.getElementById('modalContent');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalImageContainer = document.getElementById('modalImageContainer');
+            const modalDescription = document.getElementById('modalDescription');
+            const closeModalBtn = document.getElementById('closeModal');
+
+            const openModalTriggers = document.querySelectorAll('[data-modal-trigger]');
+
+            openModalTriggers.forEach(trigger => {
+                trigger.addEventListener('click', () => {
+                    const lang = document.documentElement.lang;
+                    const title = trigger.getAttribute(lang === 'en' ? 'data-title-en' : 'data-title-pt');
+                    const description = trigger.getAttribute(lang === 'en' ? 'data-description-en' : 'data-description-pt');
+
+                    const imageSvgElement = trigger.querySelector('svg');
+                    if (!imageSvgElement) return;
+                    const imageSvg = imageSvgElement.cloneNode(true);
+
+                    modalTitle.textContent = title;
+                    modalDescription.innerHTML = description;
+                    modalImageContainer.innerHTML = '';
+                    modalImageContainer.appendChild(imageSvg);
+
+                    modal.classList.remove('hidden');
+                    modal.classList.add('flex');
+                    setTimeout(() => {
+                        modal.classList.add('opacity-100');
+                        modalContent.classList.remove('scale-95', 'opacity-0');
+                        modalContent.classList.add('scale-100', 'opacity-100');
+                    }, 10);
+                });
+            });
+
+            const closeModal = () => {
+                modalContent.classList.add('scale-95', 'opacity-0');
+                modalContent.classList.remove('scale-100', 'opacity-100');
+                modal.classList.remove('opacity-100');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                    modal.classList.remove('flex');
+                }, 300);
+            };
+
+            closeModalBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === "Escape" && !modal.classList.contains('hidden')) {
+                    closeModal();
+                }
+            });
+
+            const translations = {
+                'pt-br': {
+                    'team-name': 'Guris de Marte Team',
+                    'hackathon-link': 'Hackathon Nasa Space Apps Uberlândia',
+                    'hero-title': 'Reciclagem e Manufatura em Marte',
+                    'hero-subtitle': 'Um Sistema Sustentável para a Gestão de Resíduos e Autossuficiência em Missões Espaciais',
+                    'intro-title': 'Introdução: O Desafio da Sustentabilidade em Marte',
+                    'intro-p1': 'A exploração humana de Marte representa um dos maiores desafios científicos e tecnológicos do século XXI. Para garantir autossuficiência e sustentabilidade, a gestão de resíduos e o reaproveitamento de materiais in situ emergem como fatores críticos. Estima-se que uma missão de três anos para Marte, com uma tripulação de oito pessoas, possa gerar mais de 12 toneladas de resíduos inorgânicos, tornando inviável o descarte ou o retorno à Terra.',
+                    'intro-p2': 'Nossa solução propõe um modelo conceitual de reciclagem e manufatura pós-reciclagem de materiais poliméricos, metálicos e têxteis, com ênfase em componentes como Zotek F30, Plastazote, EVA, luvas de nitrila e alumínio, resíduos comuns em missões espaciais. Este projeto busca desenvolver um sistema sustentável de reciclagem e manufatura em ambiente marciano, baseado em tecnologias já testadas pela NASA.',
+                    'poly-title': 'Processamento de Polímeros: Manufatura Aditiva e Reciclagem',
+                    'poly-subtitle': 'Transformação de resíduos como Zotek F30, Plastazote e EVA em novos produtos por meio de processos modulares e de baixo consumo energético.',
+                    'poly-step1-title': 'Triagem de Resíduos Poliméricos',
+                    'poly-step1-desc': 'Separação de resíduos como espumas e embalagens.',
+                    'poly-details-1': 'Ver Detalhes',
+                    'poly-step2-title': 'Redução Granulométrica',
+                    'poly-step2-desc': 'Trituração dos materiais em flocos uniformes.',
+                    'poly-details-2': 'Ver Detalhes',
+                    'poly-step3-title': 'Extrusão de Filamentos',
+                    'poly-step3-desc': 'Produção de matéria-prima para impressão 3D.',
+                    'poly-details-3': 'Ver Detalhes',
+                    'poly-step4-title': 'Moldagem por Termocompressão',
+                    'poly-step4-desc': 'Fabricação de peças densas por prensagem.',
+                    'poly-details-4': 'Ver Detalhes',
+                    'poly-step5-title': 'Manufatura Aditiva (FDM)',
+                    'poly-step5-desc': 'Impressão 3D de ferramentas, peças e utensílios.',
+                    'poly-details-5': 'Ver Detalhes',
+                    'poly-step6-title': 'Produção de Artefatos Funcionais',
+                    'poly-step6-desc': 'Uso dos materiais para o habitat e bem-estar da tripulação.',
+                    'poly-details-6': 'Ver Detalhes',
+                    'textile-title': 'Revalorização de Têxteis: Processos Mecânicos e Térmicos',
+                    'textile-subtitle': 'Um sistema unificado que se divide em rotas para fibras sintéticas e não-sintéticas, transformando-as em novos produtos para a colônia.',
+                    'textile-step1-title': '1. Esterilização por Ciclo Térmico',
+                    'textile-step1-desc': 'Higienização dos tecidos em alta temperatura para garantir a segurança no reaproveitamento.',
+                    'textile-details-1': 'Ver Detalhes',
+                    'textile-route-a': 'Rota A: Fibras Naturais',
+                    'textile-step2a-title': '2A. Desfibramento Mecânico',
+                    'textile-step2a-desc': 'Tecidos de algodão são triturados, retornando ao estado de fibras soltas.',
+                    'textile-details-2a': 'Ver Detalhes',
+                    'textile-step3a-title': '3A. Consolidação por Agulhagem',
+                    'textile-step3a-desc': 'Fibras são entrelaçadas mecanicamente para formar mantas coesas.',
+                    'textile-details-3a': 'Ver Detalhes',
+                    'textile-product-a-label': 'Produto Final:',
+                    'textile-product-a-desc': 'Mantas de feltro para isolamento térmico e acústico.',
+                    'textile-route-b': 'Rota B: Fibras Sintéticas',
+                    'textile-step2b-title': '2B. Termofixação por Compressão',
+                    'textile-step2b-desc': 'Tecidos sintéticos são prensados a quente para fusão parcial das fibras.',
+                    'textile-details-2b': 'Ver Detalhes',
+                    'textile-product-b-label': 'Produto Final:',
+                    'textile-product-b-desc': 'Painéis rígidos para revestimentos, divisórias ou componentes estruturais.',
+                    'textile-step-final-title': 'Etapa Final: Usinagem CNC e Acabamento',
+                    'textile-step-final-desc': 'Mantas e painéis são moldados em peças precisas para uso no habitat.',
+                    'textile-details-final': 'Ver Detalhes',
+                    'metal-title': 'Reciclagem de Ligas Metálicas para Manufatura Aditiva (WAAM)',
+                    'metal-subtitle': 'Um fluxograma para transformar sucata de alumínio em arame de alta qualidade para impressão 3D (Wire Arc Additive Manufacturing).',
+                    'metal-step1-title': '1. Triagem e Classificação de Ligas',
+                    'metal-step1-desc': 'Separação de ligas de alumínio e remoção de contaminantes.',
+                    'metal-details-1': 'Ver Detalhes',
+                    'metal-route-a': 'Sucata Leve',
+                    'metal-step2a-title': '2A. Trituração de Sucata Leve',
+                    'metal-step2a-desc': 'Redução de destroços e embalagens a flakes.',
+                    'metal-details-2a': 'Ver Detalhes',
+                    'metal-route-b': 'Componentes Estruturais',
+                    'metal-step2b-title': '2B. Seccionamento de Componentes',
+                    'metal-step2b-desc': 'Corte de peças estruturais em fragmentos.',
+                    'metal-details-2b': 'Ver Detalhes',
+                    'metal-step3-title': '3. Briquetagem por Prensagem',
+                    'metal-step3-desc': 'Compactação dos fragmentos em briquetes densos.',
+                    'metal-details-3': 'Ver Detalhes',
+                    'metal-step4-title': '4. Extrusão a Quente',
+                    'metal-step4-desc': 'Formação de varetas de alumínio a partir dos briquetes.',
+                    'metal-details-4': 'Ver Detalhes',
+                    'metal-step5-title': '5. Trefilação e Bobinamento',
+                    'metal-step5-desc': 'Produção do arame de alumínio no diâmetro final.',
+                    'metal-details-5': 'Ver Detalhes',
+                    'metal-step6-title': '6. Manufatura Aditiva (WAAM)',
+                    'metal-step6-desc': 'Impressão 3D de peças metálicas a partir do arame reciclado.',
+                    'metal-details-6': 'Ver Detalhes',
+                    'footer-desc': 'Landing page desenvolvida para o Hackathon Nasa Space Apps Uberlândia.',
+                    'footer-team': 'Guris de Marte Team',
+                    'footer-contact': 'Contato',
+                    'footer-copy': '© 2025 Guris de Marte. Todos os direitos reservados.'
+                },
+                'en': {
+                    'team-name': 'Guris de Marte Team',
+                    'hackathon-link': 'Hackathon Nasa Space Apps Uberlândia',
+                    'hero-title': 'Recycling and Manufacturing on Mars',
+                    'hero-subtitle': 'A Sustainable System for Waste Management and Self-Sufficiency in Space Missions',
+                    'intro-title': 'Introduction: The Challenge of Sustainability on Mars',
+                    'intro-p1': "Human exploration of Mars represents one of the greatest scientific and technological challenges of the 21st century. To ensure self-sufficiency and sustainability, in-situ waste management and material reuse emerge as critical factors. It's estimated that a three-year mission to Mars with an eight-person crew could generate over 12 tons of inorganic waste, making disposal or return to Earth unfeasible.",
+                    'intro-p2': 'Our solution proposes a conceptual model for recycling and post-recycling manufacturing of polymeric, metallic, and textile materials, focusing on components like Zotek F30, Plastazote, EVA, nitrile gloves, and aluminum—common waste in space missions. This project aims to develop a sustainable recycling and manufacturing system in a Martian environment, based on technologies already tested by NASA.',
+                    'poly-title': 'Polymer Processing: Additive Manufacturing and Recycling',
+                    'poly-subtitle': 'Transforming waste such as Zotek F30, Plastazote, and EVA into new products through modular, low-energy processes.',
+                    'poly-step1-title': 'Polymer Waste Sorting',
+                    'poly-step1-desc': 'Separation of waste like foams and packaging.',
+                    'poly-details-1': 'View Details',
+                    'poly-step2-title': 'Size Reduction',
+                    'poly-step2-desc': 'Shredding materials into uniform flakes.',
+                    'poly-details-2': 'View Details',
+                    'poly-step3-title': 'Filament Extrusion',
+                    'poly-step3-desc': 'Production of raw material for 3D printing.',
+                    'poly-details-3': 'View Details',
+                    'poly-step4-title': 'Thermo-compression Molding',
+                    'poly-step4-desc': 'Manufacturing dense parts by pressing.',
+                    'poly-details-4': 'View Details',
+                    'poly-step5-title': 'Additive Manufacturing (FDM)',
+                    'poly-step5-desc': '3D printing of tools, parts, and utensils.',
+                    'poly-details-5': 'View Details',
+                    'poly-step6-title': 'Production of Functional Artifacts',
+                    'poly-step6-desc': 'Use of materials for the habitat and crew well-being.',
+                    'poly-details-6': 'View Details',
+                    'textile-title': 'Textile Revaluation: Mechanical and Thermal Processes',
+                    'textile-subtitle': 'A unified system that splits into routes for synthetic and non-synthetic fibers, transforming them into new products for the colony.',
+                    'textile-step1-title': '1. Thermal Cycle Sterilization',
+                    'textile-step1-desc': 'High-temperature sanitization of fabrics to ensure safety in reuse.',
+                    'textile-details-1': 'View Details',
+                    'textile-route-a': 'Route A: Natural Fibers',
+                    'textile-step2a-title': '2A. Mechanical Defibering',
+                    'textile-step2a-desc': 'Cotton fabrics are shredded back into loose fibers.',
+                    'textile-details-2a': 'View Details',
+                    'textile-step3a-title': '3A. Needle-Punching Consolidation',
+                    'textile-step3a-desc': 'Fibers are mechanically interlaced to form cohesive mats.',
+                    'textile-details-3a': 'View Details',
+                    'textile-product-a-label': 'Final Product:',
+                    'textile-product-a-desc': 'Felt mats for thermal and acoustic insulation.',
+                    'textile-route-b': 'Route B: Synthetic Fibers',
+                    'textile-step2b-title': '2B. Thermo-setting by Compression',
+                    'textile-step2b-desc': 'Synthetic fabrics are heat-pressed to partially melt the fibers.',
+                    'textile-details-2b': 'View Details',
+                    'textile-product-b-label': 'Final Product:',
+                    'textile-product-b-desc': 'Rigid panels for linings, partitions, or structural components.',
+                    'textile-step-final-title': 'Final Stage: CNC Machining and Finishing',
+                    'textile-step-final-desc': 'Mats and panels are shaped into precise parts for habitat use.',
+                    'textile-details-final': 'View Details',
+                    'metal-title': 'Recycling of Metal Alloys for Additive Manufacturing (WAAM)',
+                    'metal-subtitle': 'A flowchart to turn aluminum scrap into high-quality wire for 3D printing (Wire Arc Additive Manufacturing).',
+                    'metal-step1-title': '1. Alloy Sorting and Classification',
+                    'metal-step1-desc': 'Separation of aluminum alloys and removal of contaminants.',
+                    'metal-details-1': 'View Details',
+                    'metal-route-a': 'Light Scrap',
+                    'metal-step2a-title': '2A. Light Scrap Shredding',
+                    'metal-step2a-desc': 'Reduction of debris and packaging to flakes.',
+                    'metal-details-2a': 'View Details',
+                    'metal-route-b': 'Structural Components',
+                    'metal-step2b-title': '2B. Component Sectioning',
+                    'metal-step2b-desc': 'Cutting structural parts into fragments.',
+                    'metal-details-2b': 'View Details',
+                    'metal-step3-title': '3. Briquetting by Pressing',
+                    'metal-step3-desc': 'Compacting fragments into dense briquettes.',
+                    'metal-details-3': 'View Details',
+                    'metal-step4-title': '4. Hot Extrusion',
+                    'metal-step4-desc': 'Forming aluminum rods from briquettes.',
+                    'metal-details-4': 'View Details',
+                    'metal-step5-title': '5. Drawing and Winding',
+                    'metal-step5-desc': 'Producing aluminum wire of the final diameter.',
+                    'metal-details-5': 'View Details',
+                    'metal-step6-title': '6. Additive Manufacturing (WAAM)',
+                    'metal-step6-desc': '3D printing of metal parts from recycled wire.',
+                    'metal-details-6': 'View Details',
+                    'footer-desc': 'Landing page developed for the Hackathon Nasa Space Apps Uberlândia.',
+                    'footer-team': 'Guris de Marte Team',
+                    'footer-contact': 'Contact',
+                    'footer-copy': '© 2025 Guris de Marte. All rights reserved.'
+                }
+            };
+
+            const setLanguage = (lang) => {
+                document.documentElement.lang = lang;
+                const content = translations[lang];
+                for (const key in content) {
+                    const element = document.getElementById(key);
+                    if (element) {
+                        element.innerHTML = content[key];
+                    }
+                }
+
+                document.querySelectorAll('[data-modal-trigger]').forEach(trigger => {
+                    const title = trigger.getAttribute(`data-title-${lang.substring(0, 2)}`);
+                    const description = trigger.getAttribute(`data-description-${lang.substring(0, 2)}`);
+                    trigger.setAttribute('data-title', title);
+                    trigger.setAttribute('data-description', description);
+                });
+
+                document.getElementById('lang-pt').classList.toggle('active', lang === 'pt-br');
+                document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+            };
+
+            document.getElementById('lang-pt').addEventListener('click', () => setLanguage('pt-br'));
+            document.getElementById('lang-en').addEventListener('click', () => setLanguage('en'));
+
+            // Set initial language
+            setLanguage('pt-br');
+        });
+    </script>
+
+</body>
+
+</html>
